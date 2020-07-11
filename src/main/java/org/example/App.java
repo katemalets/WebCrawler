@@ -23,11 +23,6 @@ import java.util.Scanner;
  */
 public class App 
 {
-    static final int depthLimit = 8;
-    static final int visitedPagesLimit = 20;
-    static int visitedPages = 1;
-    static int deadLinks = 0;
-    static Statistics statistics = new Statistics();
 
     public static void main( String[] args ) throws IOException {
 
@@ -35,38 +30,13 @@ public class App
         Document htmlDocument   = Jsoup.connect(seed).get();
         String[] terms = getTerms();
 
-        crawl(htmlDocument, terms, 1);
+        Statistics statistics = new Statistics();
+        WebCrawler webCrawler = new WebCrawler(statistics, terms);
+        webCrawler.crawl(htmlDocument, 1);
 
         statistics.saveToCSVFile("all");
         statistics.printTopStatistics();
 
-    }
-
-    public static void crawl(Document doc, String[] userTerms, int depth){
-
-        Statistic statistic = new Statistic(userTerms, doc);
-        statistic.getValues();
-        //System.out.println("Depth: " + depth + ". Visited pages: " + visitedPages);
-
-        statistics.addStatistic(statistic);
-
-        Elements links = doc.select("a[href]");
-        for(Element element: links){
-            if(depth >= depthLimit || visitedPages >= visitedPagesLimit) {
-                return;
-            }
-
-            String link = element.attr("href");
-            if(link.startsWith("http")) {
-                try {
-                    Document nextDoc = Jsoup.connect(link).get();
-                    visitedPages++;
-                    crawl(nextDoc, userTerms, depth + 1);
-                } catch (Exception exc) {
-                    deadLinks++;
-                }
-            }
-        }
     }
 
     public static String[] getTerms(){

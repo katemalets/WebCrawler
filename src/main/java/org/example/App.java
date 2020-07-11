@@ -11,6 +11,7 @@ import java.util.Scanner;
  * ToDo:
  * 7. Tests (coverage >40%)
  * 8. JavaDoc/comments
+ * 9. Read me gitHub
  * 10. CSV таблица из 3 столбцов: ссылка статистика тотал. Вместо toString -> свой метод toThreeStrings
  * 11. Почему первая строка в кавычках?
  */

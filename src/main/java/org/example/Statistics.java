@@ -36,11 +36,11 @@ public class Statistics{
         ArrayList<Statistic> statisticsCopy = new ArrayList<>(statistics);
         Collections.sort(statisticsCopy, new StatisticComparatorByTotal());
         Statistics topStatistics = new Statistics();
-        int limit = 10;
+        int limit = Math.min(10, statisticsCopy.size());
 
         for(int i = 0; i < limit; ++i) {
             Statistic currentStatistic = (Statistic)statisticsCopy.get(i);
-            System.out.println(currentStatistic.toString());
+            System.out.println(i + 1 + ") " + currentStatistic.toString());
             topStatistics.addStatistic(currentStatistic);
         }
 

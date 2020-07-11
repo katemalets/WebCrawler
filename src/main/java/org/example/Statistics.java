@@ -1,6 +1,5 @@
 package org.example;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -8,15 +7,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
-public class Statistics {
-    private ArrayList<Statistic> statistics = new ArrayList();
+public class Statistics{
 
-    public Statistics() {
-    }
+    private ArrayList<Statistic> statistics = new ArrayList();
 
     public void addStatistic(Statistic statistic) {
         this.statistics.add(statistic);
@@ -36,12 +33,13 @@ public class Statistics {
     }
 
     public void printTopStatistics() throws IOException {
-        Collections.sort(this.statistics, new StatisticComparatorByTotal());
+        ArrayList<Statistic> statisticsCopy = new ArrayList<>(statistics);
+        Collections.sort(statisticsCopy, new StatisticComparatorByTotal());
         Statistics topStatistics = new Statistics();
         int limit = 10;
 
         for(int i = 0; i < limit; ++i) {
-            Statistic currentStatistic = (Statistic)this.statistics.get(i);
+            Statistic currentStatistic = (Statistic)statisticsCopy.get(i);
             System.out.println(currentStatistic.toString());
             topStatistics.addStatistic(currentStatistic);
         }

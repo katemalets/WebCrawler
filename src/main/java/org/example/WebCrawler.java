@@ -5,15 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-/**
- * limit
- * pagesLimit
- * visitedPages
- * deadLinks
- *
- * metod
- * собрать всю статистику!
- */
+import java.io.IOException;
 
 public class WebCrawler {
 
@@ -23,10 +15,9 @@ public class WebCrawler {
     private int deadLinks = 0;
 
     private String[] userTerms;
-    private Statistics statistics;
+    private Statistics statistics = new Statistics();
 
-    public WebCrawler(Statistics statistics, String[] userTerms){
-        this.statistics = statistics;
+    public WebCrawler(String[] userTerms){
         this.userTerms = userTerms;
     }
 
@@ -55,5 +46,13 @@ public class WebCrawler {
                 }
             }
         }
+    }
+
+    public void saveStatisticsToCSVFile() throws IOException {
+        statistics.saveToCSVFile("all");
+    }
+
+    public void printTopStatistics() throws IOException {
+        statistics.printTopStatistics();
     }
 }

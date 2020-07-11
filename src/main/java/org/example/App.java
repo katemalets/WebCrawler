@@ -4,8 +4,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -20,7 +24,7 @@ import java.util.Scanner;
 public class App 
 {
     static final int depthLimit = 8;
-    static final int visitedPagesLimit = 30;
+    static final int visitedPagesLimit = 20;
     static int visitedPages = 1;
     static int deadLinks = 0;
     static Statistics statistics = new Statistics();
@@ -29,23 +33,13 @@ public class App
 
         String seed = "https://ru.wikipedia.org/wiki/Ассанж,_Джулиан";
         Document htmlDocument   = Jsoup.connect(seed).get();
-        String[] terms = {"and", "to", "Статья", "Julian", "год"};
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Input your terms: ");
-        String term = scanner.nextLine();
-        if(!term.isEmpty()){
-            terms = term.split(", ");
-        } else {
-            System.out.println("Using default terms: " + Arrays.toString(terms));
-        }
-        scanner.close();
+        String[] terms = getTerms();
 
         crawl(htmlDocument, terms, 1);
 
         statistics.saveToCSVFile("all");
         statistics.printTopStatistics();
-        //System.out.println("Dead links met: " + deadLinks);
+
     }
 
     public static void crawl(Document doc, String[] userTerms, int depth){
@@ -73,5 +67,21 @@ public class App
                 }
             }
         }
+    }
+
+    public static String[] getTerms(){
+        String[] terms;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Input terms: ");
+        String line = scanner.nextLine();
+
+        if(!line.isEmpty()){
+            terms = line.split(",");
+        } else {
+            terms = new String[] {"and", "to", "Статья", "Julian", "год"};
+            System.out.println("Using default terms: " + Arrays.toString(terms));
+        }
+        scanner.close();
+        return terms;
     }
 }

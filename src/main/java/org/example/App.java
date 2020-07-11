@@ -14,6 +14,10 @@ import java.util.Scanner;
  * 9. Read me gitHub
  * 10. CSV таблица из 3 столбцов: ссылка статистика тотал. Вместо toString -> свой метод toThreeStrings
  * 11. Почему первая строка в кавычках?
+ * 12. Спрашивать у пользователя про depth limit и visited pages limit,
+ *      но оставить возхможность использовать default, depthLimit = 8 и
+ *      visitedPagesLimit = 10_000. По аналогии с terms
+ * 13. спрашивать seed у пользователя
  */
 public class App 
 {
@@ -34,7 +38,7 @@ public class App
     public static String[] getTerms(){
         String[] terms;
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Input terms: ");
+        System.out.print("Input sample terms: ");
         String line = scanner.nextLine();
 
         if(!line.isEmpty()){

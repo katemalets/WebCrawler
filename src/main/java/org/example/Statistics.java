@@ -40,7 +40,7 @@ public class Statistics{
 
         for(int i = 0; i < limit; ++i) {
             Statistic currentStatistic = (Statistic)statisticsCopy.get(i);
-            System.out.println(i + 1 + ") " + currentStatistic.toString());
+            System.out.println((i + 1) + ") " + currentStatistic.toString());
             topStatistics.addStatistic(currentStatistic);
         }
 

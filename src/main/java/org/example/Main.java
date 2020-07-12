@@ -19,9 +19,8 @@ import java.util.Scanner;
  *      visitedPagesLimit = 10_000. По аналогии с terms
  * 13. спрашивать seed у пользователя
  */
-public class App 
+public class Main
 {
-
     public static void main( String[] args ) throws IOException {
 
         String seed = "https://ru.wikipedia.org/wiki/Ассанж,_Джулиан";

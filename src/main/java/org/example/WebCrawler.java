@@ -10,7 +10,7 @@ import java.io.IOException;
 public class WebCrawler {
 
     private final int depthLimit = 8;
-    private final int visitedPagesLimit = 15;
+    private final int visitedPagesLimit = 20;
     private int visitedPages = 1;
     private int deadLinks = 0;
 
@@ -55,4 +55,5 @@ public class WebCrawler {
     public void printTopStatistics() throws IOException {
         statistics.printTopStatistics();
     }
+
 }

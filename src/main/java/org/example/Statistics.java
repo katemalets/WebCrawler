@@ -46,4 +46,8 @@ public class Statistics{
 
         topStatistics.saveToCSVFile("top");
     }
+
+    public ArrayList<Statistic> getStatistics() {
+        return statistics;
+    }
 }

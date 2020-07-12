@@ -67,5 +67,6 @@ public class Statistic {
         result += " " + getTotal();
         return result;
     }
+
 }
 

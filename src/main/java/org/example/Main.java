@@ -10,10 +10,13 @@ import java.util.Scanner;
 
 /**
  * ToDo:
+ *
  * JavaDoc/comments
  * Read me gitHub
  * CSV таблица из 3 столбцов: ссылка статистика тотал. Вместо toString -> свой метод toThreeStrings
  * Навести порядок в main()
+ * Устранить баг
+ *
  */
 /**
  * @author Katya Malets

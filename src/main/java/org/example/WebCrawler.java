@@ -9,16 +9,18 @@ import java.io.IOException;
 
 public class WebCrawler {
 
-    private final int depthLimit = 8;
-    private final int visitedPagesLimit = 20;
+    private int depthLimit = 8;
+    private int visitedPagesLimit = 20;
     private int visitedPages = 1;
     private int deadLinks = 0;
 
     private String[] userTerms;
     private Statistics statistics = new Statistics();
 
-    public WebCrawler(String[] userTerms){
+    public WebCrawler(String[] userTerms, int depthLimit, int visitedPagesLimit){
         this.userTerms = userTerms;
+        this.depthLimit = depthLimit;
+        this.visitedPagesLimit = visitedPagesLimit;
     }
 
     public void crawl(Document doc, int depth){

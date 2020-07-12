@@ -16,6 +16,9 @@ public class WebCrawlerTest {
     String[] terms = {"a", "а", "Статья", "Julian", "год"};
     String actualLink = "https://ru.wikipedia.org/wiki/Ассанж,_Джулиан";
     Document actualDoc = Jsoup.connect(actualLink).get();
+    int depthLimit = 8;
+    int visitedPagesLimit = 20;
+
 
     public WebCrawlerTest() throws IOException {
     }
@@ -23,7 +26,7 @@ public class WebCrawlerTest {
     @Test
     public void crawl_link() {
 
-        WebCrawler webCrawler = new WebCrawler(terms);
+        WebCrawler webCrawler = new WebCrawler(terms,depthLimit,visitedPagesLimit);
         webCrawler.crawl(actualDoc,1);
 
         String actualLink = "https://ru.wikipedia.org/wiki/Ассанж,_Джулиан";

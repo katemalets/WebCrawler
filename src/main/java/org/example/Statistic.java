@@ -61,7 +61,7 @@ public class Statistic {
 
         result += doc.baseUri();
         for (HashMap.Entry<String, Integer> entry: termsStatistic.entrySet()){
-            result += " " + entry.getValue();
+            result += entry.getKey() +  " " + entry.getValue();
         }
 
         result += " " + getTotal();

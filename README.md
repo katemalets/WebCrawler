@@ -1,7 +1,7 @@
 # KM Web Crawler 
-***
 ###  What is KM Web Crawler?
 This is a **console java application**, which mainly **traverses websites** following set of parameters (see next chapter) and **collects statistic** of occurrence of predefined terms.
+***
 ### How it works?
 It implements **Depth-first search** technique with predefined depth -- a min number of transitions from seed to any traversed link. Results are saved to **.csv** files in project directory.
 ***

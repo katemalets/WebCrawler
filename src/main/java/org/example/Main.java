@@ -11,13 +11,11 @@ import java.util.Scanner;
 /**
  * ToDo:
  *
- * JavaDoc/comments
- * Read me gitHub
  * CSV таблица из 3 столбцов: ссылка статистика тотал. Вместо toString -> свой метод toThreeStrings
  * Навести порядок в main()
  * Устранить баг
- * Убрать класс с Комаратором и заменить на лямбда выражение
- *
+ * Убрать класс с Компаратором и заменить на лямбда выражение
+ * Изменить дефолтные поля
  */
 /**
  * @author Katya Malets
@@ -37,9 +35,8 @@ public class Main {
         System.out.print("Input terms separated by comma: ");
 
         /*
-         * terms - an empty array that will be filled in by the user in the future
-         * defaultTerms - default terms that will be used in extreme cases
-         * termsLine - the field that the user fills in
+         * terms - set of words (or word combinations) to be searched by Web Crawler
+         * defaultTerms - terms to be used in extreme cases
          */
         String[] terms;
         final String[] defaultTerms = {"and", "la", "Статья", "Julian", "no"};
@@ -55,8 +52,8 @@ public class Main {
         System.out.print("Input seed: ");
 
         /*
-         * seed - basic link that the user fills in(string)
-         * defaultSeed - default seed that will be used in extreme cases
+         * seed - a URL which determines Web Crawler's entry point to start surfing web
+         * defaultSeed - seed to be used in extreme cases
          */
         final String defaultSeed = "https://en.wikipedia.org/wiki/Quentin_Tarantino";
 
@@ -82,8 +79,8 @@ public class Main {
         System.out.print("Input depth limit: ");
 
         /*
-         * depthLimit - link depth limit that the user fills in(int)
-         * defaultDepthLimit - default depth limit that will be used in extreme cases
+         * depthLimit - maximum depth value that the user fills in
+         * defaultDepthLimit - depth to be used in extreme cases
          */
         int depthLimit;
         final int defaultDepthLimit = 8;
@@ -105,8 +102,8 @@ public class Main {
         System.out.print("Input visited pages limit: ");
 
         /*
-         * visitedPagesLimit - max visited pages limit that user fills in(int)
-         * defaultVisitedPagesLimit - default visited pages limit that will be used in extreme cases
+         * visitedPagesLimit - max number of web-pages to be traversed by Web Crawler
+         * defaultVisitedPagesLimit - visited pages limit to be used in extreme cases
          */
         int visitedPagesLimit;
         int defaultVisitedPagesLimit = 15;
@@ -141,12 +138,12 @@ public class Main {
 
 
         /*
-         * All statistics of visited pages are saved in the file all Statistics-<time>.csv,
+         * All statistics of visited pages are saved in the file all Statistics-<hh_mm_ss>.csv,
          * top 10 statistics on the total number of terms are printed to the console
-         * and saved in a separate file topStatistics-<time>.csv
+         * and saved in a separate file topStatistics-<hh_mm_ss>.csv
          */
         webCrawler.printTopStatistics();
         webCrawler.saveStatisticsToCSVFile();
-
+        System.out.println("Statistics successfully collected and saved to csv files.");
     }
 }

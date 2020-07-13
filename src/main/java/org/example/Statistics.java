@@ -14,9 +14,9 @@ import org.apache.commons.csv.CSVPrinter;
 /**
  * Class with property : statistics
  * collects whole statistics together
- * saves all statistics of visited pages in the file all Statistics-<time>.csv,
+ * saves all statistics of visited pages in the file all Statistics-<hh_mm_ss>.csv,
  * prints to the console top 10 statistics on the total number of terms
- * and saves in a separate file topStatistics-<time>.csv
+ * and saves in a separate file topStatistics-<hh_mm_ss>.csv
  */
 public class Statistics{
 

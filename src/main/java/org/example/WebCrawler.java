@@ -16,10 +16,7 @@ import java.io.IOException;
 public class WebCrawler {
 
     /*
-     *  depthLimit - link depth that user sets (passed through constructor)
-     *  visitedPagesLimit - max visited pages limit that user sets (passed through constructor)
      *  visitedPages - number of visited pages (starts with 1 - seed)
-     *  terms - words that user passed (passed through constructor)
      *  statistics - collection of statistics that is created and filled in in the future
      */
     private int depthLimit;
@@ -31,9 +28,9 @@ public class WebCrawler {
 
     /**
      * Constructor - creating a new object with certain values
-     * @param terms - words that user passed
-     * @param depthLimit - link depth that user sets
-     * @param visitedPagesLimit - max visited pages limit that user sets
+     * @param terms - set of words (or word combinations) to be searched by Web Crawler
+     * @param depthLimit - maximum depth value that the user fills in
+     * @param visitedPagesLimit - max number of web-pages to be traversed by Web Crawler
      */
     public WebCrawler(String[] terms, int depthLimit, int visitedPagesLimit){
         this.terms = terms;
@@ -46,7 +43,7 @@ public class WebCrawler {
      * chooses attribute <a href>, parses it and if meets depth limit - breaks,
      * else visits next link and collects all user terms there
      * @param doc - html page where user terms are collected
-     * @param depth - the number of possible clicks from one link to another (in the beginning - 1),
+     * @param depth - min number of transitions from seed to any traversed link (in the beginning - 1),
      * user puts his limit and this function will increase to the user's limit (or default limit)
      */
     public void crawl(Document doc, int depth){
@@ -68,7 +65,7 @@ public class WebCrawler {
                     visitedPages++;
                     crawl(nextDoc,depth + 1);
                 } catch (Exception exc) {
-                    exc.getMessage();
+                    System.out.println("This page no longer exists");
                 }
             }
         }

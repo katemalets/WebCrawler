@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import org.apache.commons.csv.CSVFormat;
@@ -51,14 +52,19 @@ public class Statistics{
     }
 
     /**
-     * creates a copy of existed statistics, sorts it by total (using comparator), chooses
+     * creates a copy of existed statistics, sorts it by total (using Comparator & lambda),chooses
      * how many statistic will be printed(default - 10, but user may put less limitedPages),
      * prints top 10 statistics to the console and save top 10 to csv file (using saveToCSVFile())
      * @throws IOException if a file with forbidden characters created
      */
     public void printTopStatistics() throws IOException {
         ArrayList<Statistic> statisticsCopy = new ArrayList<>(statistics);
-        Collections.sort(statisticsCopy, new StatisticComparatorByTotal());
+        Collections.sort(statisticsCopy, new Comparator<Statistic>() {
+            @Override
+            public int compare(Statistic s1, Statistic s2) {
+                return s2.getTotalTermsOccurred() - s1.getTotalTermsOccurred();
+            }
+        });
         Statistics topStatistics = new Statistics();
         int limit = Math.min(10, statisticsCopy.size());
 

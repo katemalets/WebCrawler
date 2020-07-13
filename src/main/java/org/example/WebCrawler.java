@@ -46,7 +46,7 @@ public class WebCrawler {
      * @param depth - min number of transitions from seed to any traversed link (in the beginning - 1),
      * user puts his limit and this function will increase to the user's limit (or default limit)
      */
-    public void crawl(Document doc, int depth){
+    public void crawl(Document doc, int depth) {
 
         Statistic statistic = new Statistic(terms, doc);
         statistic.getValues();

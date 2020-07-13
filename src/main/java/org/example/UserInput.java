@@ -4,6 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -55,12 +56,22 @@ public class UserInput {
         /*
          * IllegalArgumentException may be caught if users seed (link) does not exist.
          * In this case app will use default seed
+         * UnknownHostException may be caught if user has problems with the Internet
+         * System.exit method terminates the currently running JVM and exits the program
          */
         try {
             htmlDocument = Jsoup.connect(seed).get();
         } catch (IllegalArgumentException exception) {
             System.out.println("Using default seed: " + defaultSeed);
-            htmlDocument = Jsoup.connect(defaultSeed).get();
+            try {
+                htmlDocument = Jsoup.connect(defaultSeed).get();
+            } catch (UnknownHostException exc){
+                System.out.println("Check internet connection.");
+                System.exit(1);
+            }
+        } catch (UnknownHostException exception){
+            System.out.println("Check internet connection.");
+            System.exit(1);
         }
 
         System.out.print("Input depth limit: ");

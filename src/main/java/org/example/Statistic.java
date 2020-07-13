@@ -101,7 +101,10 @@ public class Statistic {
 
         result += " " + getTotalTermsOccurred();
         return result;
-    }
+}
 
+    public HashMap<String, Integer> getTermsStatistic() {
+        return termsStatistic;
+    }
 }
 

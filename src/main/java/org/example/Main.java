@@ -3,14 +3,6 @@ package org.example;
 import java.io.IOException;
 
 /**
- * ToDo:
- *
- * CSV таблица из 3 столбцов: ссылка статистика тотал. Вместо toString -> свой метод toThreeStrings
- * Устранить баг
- * Изменить дефолтные поля
- * exception
- */
-/**
  * @author Katya Malets
  * @version 1.0-beta
  */

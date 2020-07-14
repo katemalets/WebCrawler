@@ -5,6 +5,9 @@ This is a **console java application**, which mainly **traverses websites** foll
 ### How it works?
 It implements **Depth-first search** technique with predefined depth -- a min number of transitions from seed to any traversed link. Results are saved to **.csv** files in project directory.
 ***
+### Code overview
+You can find the project guide in English at this link - https://drive.google.com/file/d/1bnB_tBCoNYmsPu2-LkdFgFmICgJRJRmW/view?usp=sharing. Enjoy it! (Filmed at 6:30 am with 1 take)
+***
 ### Dependencies
 Project is using following maven dependencies:
 - junit

@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * This class gives an opportunity for user to give default or user's values
  */
-public class UserInput {
+public class User implements IUser {
 
     /**
      * terms - set of words (or word combinations) to be searched by Web Crawler
@@ -25,10 +25,27 @@ public class UserInput {
     private int depthLimit;
     private int visitedPagesLimit;
 
+    private Scanner scanner;
+    private IWebCrawler webCrawler;
+
+    public User(){
+        this.scanner = new Scanner(System.in);
+    }
+
     public void userInput() throws IOException {
 
-        Scanner scanner = new Scanner(System.in);
+        inputTerms();
 
+        inputSeed();
+
+        inputDepthLimit();
+
+        inputVisitedPagesLimit();
+
+        scanner.close();
+    }
+
+    private void inputTerms(){
         System.out.print("Input terms separated by comma: ");
 
         // defaultTerms - terms to be used in extreme cases
@@ -41,6 +58,9 @@ public class UserInput {
         } else {
             this.terms = termsLine.split(",");
         }
+    }
+
+    private void inputSeed() throws IOException {
 
         System.out.print("Input seed: ");
 
@@ -52,7 +72,6 @@ public class UserInput {
             System.out.println("Using default seed: " + defaultSeed);
             seed = defaultSeed;
         }
-
         /*
          * IllegalArgumentException may be caught if users seed (link) does not exist.
          * In this case app will use default seed
@@ -73,9 +92,9 @@ public class UserInput {
             System.out.println("Check internet connection.");
             System.exit(1);
         }
+    }
 
-        System.out.print("Input depth limit: ");
-
+    private void inputDepthLimit() {
         // defaultDepthLimit - depth to be used in extreme cases
         final int defaultDepthLimit = 8;
 
@@ -83,6 +102,9 @@ public class UserInput {
          * InputMismatchException may be caught if user inputs letters instead
          * of numbers or may be thrown if user inputs negative number
          */
+
+        System.out.print("Input depth limit: ");
+
         try {
             depthLimit = scanner.nextInt();
             if(depthLimit <= 0){
@@ -93,16 +115,19 @@ public class UserInput {
             depthLimit = defaultDepthLimit;
             scanner.nextLine();
         }
+    }
 
-        System.out.print("Input visited pages limit: ");
-
+    private void inputVisitedPagesLimit(){
         // defaultVisitedPagesLimit - visited pages limit to be used in extreme cases
         int defaultVisitedPagesLimit = 15;
+
+        System.out.print("Input visited pages limit: ");
 
         /*
          * InputMismatchException may be caught if user inputs letters instead
          * of numbers or may be thrown if user inputs negative number
          */
+
         try {
             visitedPagesLimit = scanner.nextInt();
             if(visitedPagesLimit <= 0) {
@@ -117,23 +142,41 @@ public class UserInput {
             System.out.println("Process may take significant time due to visited" +
                     " pages limit is set to " + visitedPagesLimit);
         }
-
-        scanner.close();
     }
 
-    public String[] getTerms() {
+    public static User createUser(){
+        return new User();
+    }
+
+    private String[] getTerms() {
         return terms;
     }
 
-    public Document getHtmlDocument() {
+    private Document getHtmlDocument() {
         return htmlDocument;
     }
 
-    public int getDepthLimit() {
+    private int getDepthLimit() {
         return depthLimit;
     }
 
-    public int getVisitedPagesLimit() {
+    private int getVisitedPagesLimit() {
         return visitedPagesLimit;
+    }
+
+    public void launchCrawling(){
+
+        webCrawler = new WebCrawler(getTerms(), getDepthLimit(), getVisitedPagesLimit());
+        webCrawler.crawl(getHtmlDocument(), 1);
+    }
+
+    public void getStatistics() throws IOException {
+        /*
+         * All statistics of visited pages are saved in the file all Statistics-<hh_mm_ss>.csv,
+         * top 10 statistics on the total number of terms are printed to the console
+         * and saved in a separate file topStatistics-<hh_mm_ss>.csv
+         */
+        webCrawler.printTopStatistics();
+        webCrawler.saveStatisticsToCSVFile();
     }
 }

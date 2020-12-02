@@ -13,12 +13,13 @@ import java.io.IOException;
  * Follows predefined seed, link depth and visited pages limit,
  * detects the presence of user terms on the page and collects statistic
  */
-public class WebCrawler {
+public class WebCrawler implements IWebCrawler {
 
     /*
      *  visitedPages - number of visited pages (starts with 1 - seed)
      *  statistics - collection of statistics that is created and filled in in the future
      */
+
     private int depthLimit;
     private int visitedPagesLimit;
     private int visitedPages = 1;
@@ -36,6 +37,10 @@ public class WebCrawler {
         this.terms = terms;
         this.depthLimit = depthLimit;
         this.visitedPagesLimit = visitedPagesLimit;
+    }
+
+    public WebCrawler(){
+
     }
 
     /**
